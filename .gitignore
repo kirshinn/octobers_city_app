@@ -1,0 +1,9 @@
+# folders
+.idea
+venv/
+__pycache__/
+
+# files
+*.pyc *.pyo *.pyd
+*.sqlite3
+.DS_Store

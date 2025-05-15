@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Защищённая страница{% endblock %}
+{% block content %}
+    <h1>Защищённая страница</h1>
+    <p>Это страница, доступная только авторизованным пользователям.</p>
+    <p>Привет, {{ user.username }}!</p>
+{% endblock %}
