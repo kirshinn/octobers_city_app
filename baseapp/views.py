@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from core.ml.sentiment_model import analyze_sentiment
 from .forms import CustomUserCreationForm # Используем кастомную форму
 
 def home(request):
@@ -39,4 +40,6 @@ def logout_view(request):
 
 @login_required
 def protected_view(request):
-    return render(request, 'protected.html')
+    text = "I love Django!"
+    result = analyze_sentiment(text)
+    return render(request, 'protected.html', {'text': text, 'result': result})
