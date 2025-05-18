@@ -39,7 +39,7 @@ def logout_view(request):
     return redirect('home')
 
 @login_required
-def protected_view(request):
+def protected(request):
     text = "I love Django!"
     result = analyze_sentiment(text)
     return render(request, 'protected.html', {'text': text, 'result': result})
