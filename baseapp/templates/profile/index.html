@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile of {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <p>{{ user }}</p>
+            <p>{{ user.email }}</p>
+            <p>{{ user.age }}</p>
+            <p>{{ user.bio }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

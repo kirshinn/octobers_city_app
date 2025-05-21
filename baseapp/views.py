@@ -43,3 +43,7 @@ def protected(request):
     text = "I love Django!"
     result = analyze_sentiment(text)
     return render(request, 'protected.html', {'text': text, 'result': result})
+
+@login_required
+def profile(request):
+    return render(request, 'profile/index.html')
