@@ -1,17 +1,119 @@
 {% extends 'base.html' %}
 
-{% block title %}Profile of {{ user.username }}{% endblock %}
+{% block title %}Профиль - {{ user.username }}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
-            <p>{{ user }}</p>
-            <p>{{ user.email }}</p>
-            <p>{{ user.age }}</p>
-            <p>{{ user.bio }}</p>
+<div class="container my-5">
+    <h2 class="mb-4">Профиль пользователя</h2>
+    <form method="post" class="row g-3 needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input
+                type="text"
+                name="username"
+                id="username"
+                class="form-control"
+                value="{{ user.username }}"
+                placeholder="JohnDoe"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid username.
+            </div>
         </div>
-    </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                value="{{ user.email }}"
+                placeholder="john.doe@example.com"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid email address.
+            </div>
+        </div>
+
+        <!-- First Name -->
+        <div class="col-md-6">
+            <label for="first_name" class="form-label">First Name</label>
+            <input
+                type="text"
+                name="first_name"
+                id="first_name"
+                class="form-control"
+                value="{{ user.first_name }}"
+                placeholder="John"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid first name.
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-6">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input
+                type="text"
+                name="last_name"
+                id="last_name"
+                class="form-control"
+                value="{{ user.last_name }}"
+                placeholder="Doe"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid last name.
+            </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="col-md-6">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+                type="text"
+                name="phone"
+                id="phone"
+                class="form-control"
+                value="{{ user.phone }}"
+                placeholder="+7 (123) 456-7890"
+                pattern="[0-9]{10,15}"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid phone number.
+            </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="col-12">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea
+                class="form-control"
+                id="bio"
+                name="bio"
+                rows="4"
+                placeholder="Tell us about yourself..."
+                required
+            >{{ user.profile.bio }}</textarea>
+            <div class="invalid-feedback">
+                Please provide a brief bio.
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Сохранить профиль</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

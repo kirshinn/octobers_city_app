@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Address
+from accounts.models import CustomUser, Profile, Address
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -60,3 +60,24 @@ class CustomUserCreationForm(UserCreationForm):
             address.save()
 
         return user
+
+class ProfileForm(forms.ModelForm):
+    username = forms.CharField(max_length=150)
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    phone = forms.CharField(max_length=15)
+
+    class Meta:
+        model = Profile
+        fields = ['bio']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['username'].initial = user.username
+            self.fields['email'].initial = user.email
+            self.fields['first_name'].initial = user.first_name
+            self.fields['last_name'].initial = user.last_name
+            self.fields['phone'].initial = user.phone

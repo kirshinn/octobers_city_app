@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from core.ml.sentiment_model import analyze_sentiment
-from .forms import CustomUserCreationForm # Используем кастомную форму
+from .forms import CustomUserCreationForm, ProfileForm # Используем кастомную форму для User
 
 def home(request):
     return render(request, 'home.html')
@@ -46,4 +46,29 @@ def protected(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile/index.html')
+    user = request.user
+    user_profile = user.profile
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=user_profile, user=user)
+        if form.is_valid():
+            # Save user data
+            user.username = form.cleaned_data['username']
+            user.email = form.cleaned_data['email']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.phone = form.cleaned_data['phone']
+            user.save()
+
+            # Save profile data
+            form.save()
+
+            messages.success(request, f'Профиль {user} обновлен!')
+
+            return redirect('profile')
+        else:
+            messages.error(request, 'Ошибка заполнения профиля. Проверьте введённые данные.')
+    else:
+        form = ProfileForm(instance=user_profile, user=user)
+
+    return render(request, 'profile/index.html', {'form': form})
