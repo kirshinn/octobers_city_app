@@ -68,12 +68,15 @@ class ProfileForm(forms.ModelForm):
     last_name = forms.CharField(max_length=30)
     phone = forms.CharField(max_length=15)
 
+    home = forms.IntegerField(max_value=3)
+
     class Meta:
         model = Profile
         fields = ['bio']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
+        address = kwargs.pop('address', None)
         super().__init__(*args, **kwargs)
         if user:
             self.fields['username'].initial = user.username
@@ -81,3 +84,6 @@ class ProfileForm(forms.ModelForm):
             self.fields['first_name'].initial = user.first_name
             self.fields['last_name'].initial = user.last_name
             self.fields['phone'].initial = user.phone
+
+        if address:
+            self.fields['home'].initial = address.home

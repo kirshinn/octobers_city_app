@@ -48,9 +48,10 @@ def protected(request):
 def profile(request):
     user = request.user
     user_profile = user.profile
+    address = user.address
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=user_profile, user=user)
+        form = ProfileForm(request.POST, instance=user_profile, user=user, address=address)
         if form.is_valid():
             # Save user data
             user.username = form.cleaned_data['username']
@@ -59,6 +60,10 @@ def profile(request):
             user.last_name = form.cleaned_data['last_name']
             user.phone = form.cleaned_data['phone']
             user.save()
+
+            # Save user address data
+            address.home = form.cleaned_data['home']
+            address.save()
 
             # Save profile data
             form.save()

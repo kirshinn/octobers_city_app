@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Профиль - {{ user.username }}{% endblock %}
+{% block title %}Profile - {{ user.username }}{% endblock %}
 
 {% block content %}
 <div class="container my-5">
-    <h2 class="mb-4">Профиль пользователя</h2>
+    <h2 class="mb-4">User Profile</h2>
     <form method="post" class="row g-3 needs-validation" novalidate>
         {% csrf_token %}
 
@@ -110,9 +110,111 @@
             </div>
         </div>
 
+        <!-- User Address City -->
+        <div class="col-md-4">
+            <label for="city" class="form-label">City</label>
+            <input
+                type="text"
+                name="city"
+                id="city"
+                class="form-control"
+                value="{{ user.address.city }}"
+                placeholder="city"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid city.
+            </div>
+        </div>
+
+        <!-- User Address Street -->
+        <div class="col-md-4">
+            <label for="street" class="form-label">Street</label>
+            <input
+                type="text"
+                name="street"
+                id="street"
+                class="form-control"
+                value="{{ user.address.street }}"
+                placeholder="street"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid street.
+            </div>
+        </div>
+
+        <!-- User Address Home -->
+        <div class="col-md-4">
+            <label for="home" class="form-label">Home</label>
+            <input
+                type="number"
+                name="home"
+                id="home"
+                class="form-control"
+                value="{{ user.address.home }}"
+                placeholder="home number"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid home number.
+            </div>
+        </div>
+
+        <!-- User Address Entrance -->
+        <div class="col-md-4">
+            <label for="entrance" class="form-label">Entrance</label>
+            <input
+                type="number"
+                name="entrance"
+                id="entrance"
+                class="form-control"
+                value="{{ user.address.entrance }}"
+                placeholder="entrance"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid entrance.
+            </div>
+        </div>
+
+        <!-- User Address Floor -->
+        <div class="col-md-4">
+            <label for="floor" class="form-label">Floor</label>
+            <input
+                type="number"
+                name="floor"
+                id="floor"
+                class="form-control"
+                value="{{ user.address.floor }}"
+                placeholder="floor"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid floor.
+            </div>
+        </div>
+
+        <!-- User Address Apartment -->
+        <div class="col-md-4">
+            <label for="apartment" class="form-label">Apartment</label>
+            <input
+                type="number"
+                name="apartment"
+                id="apartment"
+                class="form-control"
+                value="{{ user.address.apartment }}"
+                placeholder="apartment"
+                required
+            >
+            <div class="invalid-feedback">
+                Please enter a valid apartment.
+            </div>
+        </div>
+
         <!-- Submit Button -->
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Сохранить профиль</button>
+            <button class="btn btn-primary" type="submit">Save Profile</button>
         </div>
     </form>
 </div>
