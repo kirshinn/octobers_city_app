@@ -52,7 +52,6 @@
                 class="form-control"
                 value="{{ user.first_name }}"
                 placeholder="John"
-                required
             >
             <div class="invalid-feedback">
                 Please enter a valid first name.
@@ -69,7 +68,6 @@
                 class="form-control"
                 value="{{ user.last_name }}"
                 placeholder="Doe"
-                required
             >
             <div class="invalid-feedback">
                 Please enter a valid last name.
@@ -94,6 +92,23 @@
             </div>
         </div>
 
+        <!-- Telegram -->
+        <div class="col-md-6">
+            <label for="telegram" class="form-label">Telegram Account</label>
+            <input
+                type="text"
+                name="telegram"
+                id="telegram"
+                class="form-control"
+                value="{{ user.telegram }}"
+                placeholder="@username"
+                pattern="@[A-Za-z0-9_]{5,32}"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid telegram account.
+            </div>
+        </div>
+
         <!-- Bio -->
         <div class="col-12">
             <label for="bio" class="form-label">Bio</label>
@@ -103,7 +118,6 @@
                 name="bio"
                 rows="4"
                 placeholder="Tell us about yourself..."
-                required
             >{{ user.profile.bio }}</textarea>
             <div class="invalid-feedback">
                 Please provide a brief bio.
@@ -171,7 +185,6 @@
                 class="form-control"
                 value="{{ user.address.entrance }}"
                 placeholder="entrance"
-                required
             >
             <div class="invalid-feedback">
                 Please enter a valid entrance.
@@ -188,7 +201,6 @@
                 class="form-control"
                 value="{{ user.address.floor }}"
                 placeholder="floor"
-                required
             >
             <div class="invalid-feedback">
                 Please enter a valid floor.

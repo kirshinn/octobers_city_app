@@ -62,13 +62,21 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 class ProfileForm(forms.ModelForm):
+    # User
     username = forms.CharField(max_length=150)
     email = forms.EmailField()
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
     phone = forms.CharField(max_length=15)
+    telegram = forms.CharField(max_length=32)
 
-    home = forms.IntegerField(max_value=3)
+    # Address
+    city = forms.CharField(max_length=30)
+    street = forms.CharField(max_length=50)
+    home = forms.IntegerField(max_value=4)
+    entrance = forms.IntegerField(max_value=10)
+    floor = forms.IntegerField(max_value=30)
+    apartment = forms.IntegerField(max_value=500)
 
     class Meta:
         model = Profile
@@ -84,6 +92,12 @@ class ProfileForm(forms.ModelForm):
             self.fields['first_name'].initial = user.first_name
             self.fields['last_name'].initial = user.last_name
             self.fields['phone'].initial = user.phone
+            self.fields['telegram'].initial = user.telegram
 
         if address:
+            self.fields['city'].initial = address.city
+            self.fields['street'].initial = address.street
             self.fields['home'].initial = address.home
+            self.fields['entrance'].initial = address.entrance
+            self.fields['floor'].initial = address.floor
+            self.fields['apartment'].initial = address.apartment

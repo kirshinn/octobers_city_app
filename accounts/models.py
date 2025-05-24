@@ -15,6 +15,7 @@ class Address(models.Model):
 
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=15)
+    telegram = models.CharField(max_length=32)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

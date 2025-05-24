@@ -59,10 +59,16 @@ def profile(request):
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
             user.phone = form.cleaned_data['phone']
+            user.telegram = form.cleaned_data['telegram']
             user.save()
 
             # Save user address data
+            address.city = form.cleaned_data['city']
+            address.street = form.cleaned_data['street']
             address.home = form.cleaned_data['home']
+            address.entrance = form.cleaned_data['entrance']
+            address.floor = form.cleaned_data['floor']
+            address.apartment = form.cleaned_data['apartment']
             address.save()
 
             # Save profile data
