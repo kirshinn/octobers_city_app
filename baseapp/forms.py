@@ -63,20 +63,20 @@ class CustomUserCreationForm(UserCreationForm):
 
 class ProfileForm(forms.ModelForm):
     # User
-    username = forms.CharField(max_length=150)
-    email = forms.EmailField()
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
-    phone = forms.CharField(max_length=15)
-    telegram = forms.CharField(max_length=32)
+    username = forms.CharField(max_length=150, required=True)
+    email = forms.EmailField(required=False)
+    first_name = forms.CharField(max_length=30, required=False)
+    last_name = forms.CharField(max_length=30, required=False)
+    phone = forms.CharField(max_length=15, required=False)
+    telegram = forms.CharField(max_length=32, required=False)
 
     # Address
-    city = forms.CharField(max_length=30)
-    street = forms.CharField(max_length=50)
-    home = forms.IntegerField(max_value=4)
-    entrance = forms.IntegerField(max_value=10)
-    floor = forms.IntegerField(max_value=30)
-    apartment = forms.IntegerField(max_value=500)
+    city = forms.CharField(max_length=30, required=False)
+    street = forms.CharField(max_length=50, required=False)
+    home = forms.IntegerField(max_value=4, required=False)
+    entrance = forms.IntegerField(max_value=10, required=False)
+    floor = forms.IntegerField(max_value=30, required=False)
+    apartment = forms.IntegerField(max_value=500, required=False)
 
     class Meta:
         model = Profile
