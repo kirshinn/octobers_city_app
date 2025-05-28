@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'formtools',
     'core',
     'accounts',
+    'feedback',
     'baseapp'
 ]
 
