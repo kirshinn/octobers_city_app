@@ -149,3 +149,6 @@ EMAIL_HOST_USER = 'your-email@gmail.com'     # email отправителя
 EMAIL_HOST_PASSWORD = 'your-app-password'    # пароль приложения
 DEFAULT_FROM_EMAIL = 'your-email@gmail.com'  # email отправителя
 DEFAULT_TO_EMAILS = ['<EMAIL>', '<EMAIL>']   # список получателей
+
+# Video
+CAMERA_LINKS = ['https://rtspcam.ru/stream/zdveay1tbvbrehj']
