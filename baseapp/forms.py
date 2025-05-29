@@ -67,7 +67,7 @@ class ProfileForm(forms.ModelForm):
     email = forms.EmailField(required=False)
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
-    phone = forms.CharField(max_length=15, required=False)
+    phone = forms.CharField(max_length=17, required=False)
     telegram = forms.CharField(max_length=32, required=False)
 
     # Address

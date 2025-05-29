@@ -14,7 +14,7 @@ class Address(models.Model):
         return f"{self.city}, {self.street}, {self.home}"
 
 class CustomUser(AbstractUser):
-    phone = models.CharField(max_length=15, null=True, blank=True, default='')
+    phone = models.CharField(max_length=17, null=True, blank=True, default='')
     telegram = models.CharField(max_length=32, null=True, blank=True, default='')
 
     def __str__(self):
