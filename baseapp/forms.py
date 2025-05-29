@@ -73,7 +73,7 @@ class ProfileForm(forms.ModelForm):
     # Address
     city = forms.CharField(max_length=30, required=False)
     street = forms.CharField(max_length=50, required=False)
-    home = forms.IntegerField(max_value=4, required=False)
+    home = forms.IntegerField(max_value=100, required=False)
     entrance = forms.IntegerField(max_value=10, required=False)
     floor = forms.IntegerField(max_value=30, required=False)
     apartment = forms.IntegerField(max_value=500, required=False)
