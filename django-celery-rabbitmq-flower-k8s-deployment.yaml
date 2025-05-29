@@ -1,0 +1,288 @@
+---
+# Deployment: Django-приложение
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+  labels:
+    app: django
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+      - name: django
+        image: your-django-image:5.2
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: database-url
+        - name: DJANGO_SETTINGS_MODULE
+          value: "your_project.settings"
+        - name: REDIS_URL # Для кэширования
+          value: "redis://redis-service:6379/0"
+        - name: CELERY_BROKER_URL # RabbitMQ как брокер для Celery
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: celery-broker-url
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        readinessProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+# Service: Доступ к Django внутри кластера
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-service
+spec:
+  selector:
+    app: django
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
+---
+# Deployment: Celery worker для фоновых задач
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-worker
+  labels:
+    app: celery
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: celery
+  template:
+    metadata:
+      labels:
+        app: celery
+    spec:
+      containers:
+      - name: celery
+        image: your-django-image:5.2
+        command: ["celery", "-A", "your_project", "worker", "--loglevel=info"]
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: database-url
+        - name: REDIS_URL
+          value: "redis://redis-service:6379/0"
+        - name: CELERY_BROKER_URL # RabbitMQ как брокер
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: celery-broker-url
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+# Deployment: Redis (только для кэширования)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+---
+# Service: Доступ к Redis внутри кластера
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  type: ClusterIP
+---
+# Deployment: RabbitMQ (брокер сообщений)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3.12
+        ports:
+        - containerPort: 5672
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: rabbitmq-username
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: rabbitmq-password
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "300m"
+            memory: "512Mi"
+---
+# Service: Доступ к RabbitMQ внутри кластера
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-service
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+  type: ClusterIP
+---
+# Deployment: Flower для мониторинга Celery
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flower
+  labels:
+    app: flower
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flower
+  template:
+    metadata:
+      labels:
+        app: flower
+    spec:
+      containers:
+      - name: flower
+        image: mher/flower:2.0
+        ports:
+        - containerPort: 5555
+        env:
+        - name: CELERY_BROKER_URL
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: celery-broker-url
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+---
+# Service: Доступ к Flower внутри кластера
+apiVersion: v1
+kind: Service
+metadata:
+  name: flower-service
+spec:
+  selector:
+    app: flower
+  ports:
+    - protocol: TCP
+      port: 5555
+      targetPort: 5555
+  type: ClusterIP
+---
+# Ingress: Внешний доступ к Django
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: django-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: your-domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: django-service
+            port:
+              number: 80
+---
+# Secret: Конфиденциальные данные
+apiVersion: v1
+kind: Secret
+metadata:
+  name: django-secrets
+type: Opaque
+data:
+  database-url: <base64-encoded-database-url> # Например, postgres://user:pass@host:port/db
+  celery-broker-url: <base64-encoded-broker-url> # Например, amqp://user:pass@rabbitmq-service:5672//
+  rabbitmq-username: <base64-encoded-username> # Например, user
+  rabbitmq-password: <base64-encoded-password> # Например, pass
