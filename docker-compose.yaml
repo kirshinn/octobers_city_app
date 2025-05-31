@@ -1,0 +1,91 @@
+services:
+  # Django-приложение с gunicorn
+  django:
+    build:
+      context: ./infrastructure
+      dockerfile: Dockerfile
+    container_name: django
+    command: gunicorn --bind 0.0.0.0:8000 octobers_city_app.wsgi:application
+    ports:
+      - "8000:8000" # Открываем порт для Nginx на хосте
+    environment:
+      - DATABASE_URL=${DATABASE_URL} # Например, postgres://user:pass@db:5432/db
+      - DJANGO_SETTINGS_MODULE=octobers_city_app.settings
+      - REDIS_URL=redis://redis:6379/0 # Для кэширования
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL} # Например, amqp://user:pass@rabbitmq:5672//
+    depends_on:
+      - redis
+      - rabbitmq
+    restart: unless-stopped
+
+  # Celery worker для фоновых задач
+  celery:
+    build:
+      context: ./infrastructure
+      dockerfile: Dockerfile
+    container_name: celery
+    command: celery -A your_project worker --loglevel=info
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+    depends_on:
+      - redis
+      - rabbitmq
+    restart: unless-stopped
+
+  # Redis для кэширования
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379" # Для локального доступа (опционально)
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  # RabbitMQ как брокер сообщений
+  rabbitmq:
+    image: rabbitmq:3.12
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    ports:
+      - "5672:5672" # AMQP порт
+      - "15672:15672" # Management UI (опционально)
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    restart: unless-stopped
+
+  # Flower для мониторинга Celery
+  flower:
+    image: mher/flower:2.0
+    container_name: flower
+    environment:
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+      - FLOWER_BASIC_AUTH=${FLOWER_AUTH} # Например, admin:pass
+    ports:
+      - "5555:5555" # Открываем порт для Nginx на хосте
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  # PostgreSQL (опционально, если база данных локальная)
+  db:
+    image: postgres:15
+    container_name: db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432" # Для локального доступа (опционально)
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  rabbitmq-data:
+  db-data:

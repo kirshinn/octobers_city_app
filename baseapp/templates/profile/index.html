@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">User Profile</h2>
+    <form method="post" class="row g-3 needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input
+                type="text"
+                name="username"
+                id="username"
+                class="form-control"
+                value="{{ user.username }}"
+                placeholder="JohnDoe"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid username.
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                value="{{ user.email }}"
+                placeholder="john.doe@example.com"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid email address.
+            </div>
+        </div>
+
+        <!-- First Name -->
+        <div class="col-md-6">
+            <label for="first_name" class="form-label">First Name</label>
+            <input
+                type="text"
+                name="first_name"
+                id="first_name"
+                class="form-control"
+                value="{{ user.first_name }}"
+                placeholder="John"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid first name.
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-6">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input
+                type="text"
+                name="last_name"
+                id="last_name"
+                class="form-control"
+                value="{{ user.last_name }}"
+                placeholder="Doe"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid last name.
+            </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="col-md-6">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+                type="text"
+                name="phone"
+                id="phone"
+                class="form-control"
+                value="{{ user.phone }}"
+                placeholder="+7 (123) 456-7890"
+                pattern="[0-9]{10,15}"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid phone number.
+            </div>
+        </div>
+
+        <!-- Telegram -->
+        <div class="col-md-6">
+            <label for="telegram" class="form-label">Telegram Account</label>
+            <input
+                type="text"
+                name="telegram"
+                id="telegram"
+                class="form-control"
+                value="{{ user.telegram }}"
+                placeholder="@username"
+                pattern="@[A-Za-z0-9_]{5,32}"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid telegram account.
+            </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="col-12">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea
+                class="form-control"
+                id="bio"
+                name="bio"
+                rows="4"
+                placeholder="Tell us about yourself..."
+            >{{ user.profile.bio }}</textarea>
+            <div class="invalid-feedback">
+                Please provide a brief bio.
+            </div>
+        </div>
+
+        <!-- User Address City -->
+        <div class="col-md-4">
+            <label for="city" class="form-label">City</label>
+            <input
+                type="text"
+                name="city"
+                id="city"
+                class="form-control"
+                value="{{ user.address.city }}"
+                placeholder="city"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid city.
+            </div>
+        </div>
+
+        <!-- User Address Street -->
+        <div class="col-md-4">
+            <label for="street" class="form-label">Street</label>
+            <input
+                type="text"
+                name="street"
+                id="street"
+                class="form-control"
+                value="{{ user.address.street }}"
+                placeholder="street"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid street.
+            </div>
+        </div>
+
+        <!-- User Address Home -->
+        <div class="col-md-4">
+            <label for="home" class="form-label">Home</label>
+            <input
+                type="number"
+                name="home"
+                id="home"
+                class="form-control"
+                value="{{ user.address.home }}"
+                placeholder="home number"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid home number.
+            </div>
+        </div>
+
+        <!-- User Address Entrance -->
+        <div class="col-md-4">
+            <label for="entrance" class="form-label">Entrance</label>
+            <input
+                type="number"
+                name="entrance"
+                id="entrance"
+                class="form-control"
+                value="{{ user.address.entrance }}"
+                placeholder="entrance"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid entrance.
+            </div>
+        </div>
+
+        <!-- User Address Floor -->
+        <div class="col-md-4">
+            <label for="floor" class="form-label">Floor</label>
+            <input
+                type="number"
+                name="floor"
+                id="floor"
+                class="form-control"
+                value="{{ user.address.floor }}"
+                placeholder="floor"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid floor.
+            </div>
+        </div>
+
+        <!-- User Address Apartment -->
+        <div class="col-md-4">
+            <label for="apartment" class="form-label">Apartment</label>
+            <input
+                type="number"
+                name="apartment"
+                id="apartment"
+                class="form-control"
+                value="{{ user.address.apartment }}"
+                placeholder="apartment"
+            >
+            <div class="invalid-feedback">
+                Please enter a valid apartment.
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Save Profile</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

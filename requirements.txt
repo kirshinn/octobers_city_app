@@ -2,6 +2,7 @@ asgiref==3.8.1
 certifi==2025.4.26
 charset-normalizer==3.4.2
 Django==5.2.1
+django-formtools==2.5.1
 filelock==3.18.0
 fsspec==2025.3.2
 huggingface-hub==0.31.2

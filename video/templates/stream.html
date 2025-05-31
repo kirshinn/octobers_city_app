@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Translations{% endblock %}
+{% block content %}
+    <h1>Translations</h1>
+    <div class="card mb-3">
+        <div class="ratio ratio-16x9">
+          <iframe
+            src="{{ camera_link }}"
+            allowfullscreen
+            style="border: 0;">
+          </iframe>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-muted">Camera Stream</p>
+            {% if not camera_link %}
+            <p class="text-danger">No camera link provided.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
