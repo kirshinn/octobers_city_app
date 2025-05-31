@@ -5,34 +5,38 @@ from accounts.models import CustomUser, Profile, Address
 
 class CustomUserCreationForm(UserCreationForm):
     # Поля для модели Address
-    home = forms.IntegerField(required=True, label='Номер дома')
-    apartment = forms.IntegerField(required=True, label='Номер квартиры')
+    home = forms.IntegerField(required=True, label='House number')
+    apartment = forms.IntegerField(required=True, label='Apartment number')
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Введите имя пользователя',
+            'placeholder': 'Enter username',
+        })
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control mt-2',
+            'placeholder': 'Enter email',
         })
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Введите пароль',
+            'placeholder': 'Enter password',
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Подтвердите пароль',
+            'placeholder': 'Confirm password',
         })
         self.fields['home'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Номер дома',
+            'placeholder': 'House number',
         })
         self.fields['apartment'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Номер квартиры',
+            'placeholder': 'Apartment number',
         })
 
         # Убираем help_text

@@ -79,7 +79,7 @@ def profile(request):
             # Save profile data
             form.save()
 
-            messages.success(request, f'Профиль {user} обновлен!')
+            messages.success(request, f'Profile {user} updated!')
 
             return redirect('profile')
         else:
