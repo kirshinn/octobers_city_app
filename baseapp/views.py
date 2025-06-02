@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from core.ml.sentiment_model import analyze_sentiment
-from accounts.models import Profile, Address
+from accounts.models import CustomUser, Profile, Address
 from .forms import CustomUserCreationForm, ProfileForm # Используем кастомную форму для User
 
 def home(request):
@@ -89,3 +92,30 @@ def profile(request):
         form = ProfileForm(instance=user_profile, user=user, address=address)
 
     return render(request, 'profile/index.html', {'form': form})
+
+@login_required
+def user_list(request):
+    return render(request, 'users/user_list.html')
+
+@login_required
+@require_GET
+def user_search(request):
+    query = request.GET.get('q', 'users/')
+    users = CustomUser.objects.filter(
+        Q(username__icontains=query) |
+        Q(first_name__icontains=query) |
+        Q(last_name__icontains=query) |
+        Q(address__home__icontains=query) |
+        Q(address__apartment__icontains=query)
+    ).select_related('address').order_by('username')
+
+    data = [{
+        'username': user.username,
+        'first_name': user.first_name or '-',
+        'last_name': user.last_name or '-',
+        'email': user.email or '-',
+        'home': user.address.home if hasattr(user, 'address') and user.address.home else '-',
+        'apartment': user.address.apartment if hasattr(user, 'address') and user.address.apartment else '-'
+    } for user in users]
+
+    return JsonResponse({'users': data})
