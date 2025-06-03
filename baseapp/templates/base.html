@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,9 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_list' %}">Users</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'stream' %}">VideoStream</a>
                         </li>
                         <li class="nav-item">
@@ -38,6 +42,26 @@
                             <a class="nav-link" href="{% url 'register' %}">Register</a>
                         </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+
+                            {% for lang in languages %}
+                                <form method="post" action="{% url 'set_language' %}" class="m-0 p-0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="language" value="{{ lang.code }}">
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <button type="submit" class="btn btn-link p-0 m-0" style="border: none;">
+                                        <img src="{% static 'img/flags/' %}{{ lang.code }}.svg"
+                                             alt="{{ lang.name_local }}"
+                                             style="width: 24px; height: 24px; {% if lang.code == LANGUAGE_CODE %}filter: brightness(1);{% else %}filter: grayscale(100%);{% endif %}">
+                                    </button>
+                                </form>
+                            {% endfor %}
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
