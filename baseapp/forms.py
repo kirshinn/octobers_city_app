@@ -84,7 +84,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['bio']
+        fields = ['bio', 'allow_data_access']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)

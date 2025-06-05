@@ -98,8 +98,8 @@
                 id="telegram"
                 class="form-control"
                 value="{{ user.telegram }}"
-                placeholder="@username"
-                pattern="@[A-Za-z0-9_]{5,32}"
+                placeholder="username"
+                pattern="[A-Za-z0-9_]{5,32}"
             >
             <div class="invalid-feedback">
                 Please enter a valid telegram account.
@@ -215,6 +215,20 @@
             <div class="invalid-feedback">
                 Please enter a valid apartment.
             </div>
+        </div>
+
+        <!-- Allow Data Access -->
+        <div class="col-12 form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="allow_data_access"
+                id="allow_data_access"
+                {% if user.profile.allow_data_access %}checked{% endif %}
+            >
+            <label class="form-check-label" for="allow_data_access">
+                Allow to open data
+            </label>
         </div>
 
         <!-- Submit Button -->
