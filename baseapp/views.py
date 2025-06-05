@@ -115,7 +115,8 @@ def user_search(request):
         'last_name': user.last_name or '-',
         'email': user.email or '-',
         'home': user.address.home if hasattr(user, 'address') and user.address.home else '-',
-        'apartment': user.address.apartment if hasattr(user, 'address') and user.address.apartment else '-'
+        'apartment': user.address.apartment if hasattr(user, 'address') and user.address.apartment else '-',
+        'telegram': user.telegram
     } for user in users]
 
     return JsonResponse({'users': data})
