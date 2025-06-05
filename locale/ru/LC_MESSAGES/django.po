@@ -1292,3 +1292,8 @@ msgstr "Обратная связь"
 #: baseapp/templates/base.html:32
 msgid "Profile"
 msgstr "Профиль"
+
+#: baseapp/templates/base.html:8
+#: baseapp/templates/base.html:15
+msgid "Residents portal of SK Oktyabrsky"
+msgstr "Портал жителей СК Октябрьский"
