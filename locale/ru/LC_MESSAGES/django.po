@@ -1298,6 +1298,18 @@ msgstr "Профиль"
 msgid "Residents portal of SK Oktyabrsky"
 msgstr "Портал жителей СК Октябрьский"
 
+msgid "Enter username"
+msgstr "Введите имя пользователя"
+
+msgid "Enter email"
+msgstr "Введите почту"
+
+msgid "Enter password"
+msgstr "Введите пароль"
+
+msgid "Confirm password"
+msgstr "Повторите пароль"
+
 msgid "House number"
 msgstr "Номер дома"
 
