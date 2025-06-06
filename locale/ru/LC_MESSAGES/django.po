@@ -1297,3 +1297,9 @@ msgstr "Профиль"
 #: baseapp/templates/base.html:15
 msgid "Residents portal of SK Oktyabrsky"
 msgstr "Портал жителей СК Октябрьский"
+
+msgid "House number"
+msgstr "Номер дома"
+
+msgid "Apartment number"
+msgstr "Номер квартиры"

@@ -1,12 +1,13 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import CustomUser, Profile, Address
 
 
 class CustomUserCreationForm(UserCreationForm):
     # Поля для модели Address
-    home = forms.IntegerField(required=True, label='House number')
-    apartment = forms.IntegerField(required=True, label='Apartment number')
+    home = forms.IntegerField(required=True, label=_('House number'))
+    apartment = forms.IntegerField(required=True, label=_('Apartment number'))
 
     class Meta:
         model = CustomUser
@@ -16,27 +17,27 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Enter username',
+            'placeholder': _('Enter username'),
         })
         self.fields['email'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Enter email',
+            'placeholder': _('Enter email'),
         })
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Enter password',
+            'placeholder': _('Enter password'),
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Confirm password',
+            'placeholder': _('Confirm password'),
         })
         self.fields['home'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'House number',
+            'placeholder': _('House number'),
         })
         self.fields['apartment'].widget.attrs.update({
             'class': 'form-control mt-2',
-            'placeholder': 'Apartment number',
+            'placeholder': _('Apartment number'),
         })
 
         # Убираем help_text
