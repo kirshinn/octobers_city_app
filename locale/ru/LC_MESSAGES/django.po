@@ -1266,12 +1266,12 @@ msgstr ""
 #: baseapp/templates/login.html:2
 #: baseapp/templates/login.html:6
 #: baseapp/templates/login.html:17
-msgid "Sign in"
-msgstr "Войти"
+msgid "sign in"
+msgstr "войти"
 
 #: baseapp/templates/base.html:42
-msgid "Register"
-msgstr "Регистрация"
+msgid "register"
+msgstr "регистрация"
 
 #: baseapp/templates/base.html:35
 msgid "Logout"
@@ -1315,3 +1315,15 @@ msgstr "Номер дома"
 
 msgid "Apartment number"
 msgstr "Номер квартиры"
+
+msgid "welcome"
+msgstr "добро пожаловать"
+
+msgid "hello"
+msgstr "привет"
+
+msgid "please"
+msgstr "пожалуйста"
+
+msgid "select"
+msgstr "выберите"

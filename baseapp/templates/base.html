@@ -36,10 +36,12 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">{% trans "Sign in" %}</a>
+                            {% trans "sign in" as sign_in_translated %}
+                            <a class="nav-link" href="{% url 'login' %}">{{ sign_in_translated|capfirst }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}">{% trans "Register" %}</a>
+                            {% trans "register" as register_translated %}
+                            <a class="nav-link" href="{% url 'register' %}">{{ register_translated|capfirst }}</a>
                         </li>
                     {% endif %}
                     <li class="nav-item">

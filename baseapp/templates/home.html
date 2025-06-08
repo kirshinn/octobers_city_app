@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}Main{% endblock %}
 {% block content %}
-    <h1>Welcome!</h1>
+    {% trans "welcome" as welcome_translated %}
+    <h1>{{ welcome_translated|capfirst }}!</h1>
     {% if user.is_authenticated %}
-        <p>Hello, {{ user.username }}!</p>
+        {% trans "hello" as hello_translated %}
+        <p>{{ hello_translated|capfirst }}, {{ user.username }}!</p>
     {% else %}
-        <p>Please, <a href="{% url 'login' %}">sign in</a> or <a href="{% url 'register' %}">register</a>.</p>
+        {% trans "select" as select_translated %}
+        <p>{{ select_translated|capfirst }}, <a href="{% url 'login' %}">{% trans "sign in" %}</a> {% trans "or" %} <a href="{% url 'register' %}">{% trans "register" %}</a>.</p>
     {% endif %}
 {% endblock %}
