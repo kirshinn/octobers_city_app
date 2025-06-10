@@ -1342,3 +1342,18 @@ msgstr "дом"
 
 msgid "apartment"
 msgstr "квартира"
+
+msgid "translation"
+msgstr "трансляция"
+
+msgid "subject"
+msgstr "тема"
+
+msgid "message"
+msgstr "сообщение"
+
+msgid "Enter subject"
+msgstr "Введите тему"
+
+msgid "Enter your message"
+msgstr "Введите ваше сообщение"
