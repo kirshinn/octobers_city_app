@@ -1,25 +1,26 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}Users list{% endblock %}
 {% block content %}
     <div class="container mt-5">
-        <h2 class="mb-4">Users list</h2>
+        <h2 class="mb-4">{% trans "Neighbours" %}</h2>
 
         <!-- Search Form -->
         <div class="mb-4">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search by username, first name, last name, home or apartment">
+            <input type="text" id="searchInput" class="form-control" placeholder="{% trans "Search by username, first name, last name, home or apartment" %}">
         </div>
 
         <!-- User Table -->
         <table class="table table-striped" id="userTable">
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Home</th>
-                    <th>Apartment</th>
-                    <th>Telegram</th>
+                    <th>{% trans "username" %}</th>
+                    <th>{% trans "first name" %}</th>
+                    <th>{% trans "last name" %}</th>
+                    <th>{% trans "email" %}</th>
+                    <th>{% trans "home" %}</th>
+                    <th>{% trans "apartment" %}</th>
+                    <th>telegram</th>
                 </tr>
             </thead>
             <tbody id="userTableBody">
@@ -60,7 +61,7 @@
                                                 4.26-3.85c.18-.16-.04-.25-.28-.09l-5.27
                                                 3.31-2.27-.71c-.49-.15-.5-.49.1-.72l8.88-3.42c.41-.15.77.1.64.7z"/>
                                         </svg>
-                                        <span>send message</span>
+                                        <span>{% trans "send message" %}</span>
                                     </a>
                                 </td>
                             `;

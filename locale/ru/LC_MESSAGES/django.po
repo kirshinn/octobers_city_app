@@ -1327,3 +1327,18 @@ msgstr "пожалуйста"
 
 msgid "select"
 msgstr "выберите"
+
+msgid "email"
+msgstr "почта"
+
+msgid "send message"
+msgstr "написать"
+
+msgid "Search by username, first name, last name, home or apartment"
+msgstr "Поиск по имени пользователя, имени, фамилии, дому или квартире"
+
+msgid "home"
+msgstr "дом"
+
+msgid "apartment"
+msgstr "квартира"
