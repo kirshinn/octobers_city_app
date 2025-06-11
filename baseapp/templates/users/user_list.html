@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}Users list{% endblock %}
 {% block content %}
     <div class="container mt-5">
-        <h2 class="mb-4">Users list</h2>
+        <h2 class="mb-4">{% trans "Neighbours" %}</h2>
 
         <!-- Search Form -->
         <div class="mb-4">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search by username, first name, last name, home or apartment">
+            <input type="text" id="searchInput" class="form-control" placeholder="{% trans "Search by username, first name, last name, home or apartment" %}">
         </div>
 
         <!-- User Table -->
         <table class="table table-striped" id="userTable">
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Home</th>
-                    <th>Apartment</th>
+                    <th>{% trans "username" %}</th>
+                    <th>{% trans "first name" %}</th>
+                    <th>{% trans "last name" %}</th>
+                    <th>{% trans "email" %}</th>
+                    <th>{% trans "home" %}</th>
+                    <th>{% trans "apartment" %}</th>
+                    <th>telegram</th>
                 </tr>
             </thead>
             <tbody id="userTableBody">
@@ -47,6 +49,21 @@
                                 <td>${user.email}</td>
                                 <td>${user.home}</td>
                                 <td>${user.apartment}</td>
+                                <td>
+                                    <a href="https://t.me/${user.telegram}" target="_blank"
+                                       style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+                                              background-color: #0088cc; color: white; border-radius: 6px; text-decoration: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" fill="white">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+                                                10-4.48 10-10S17.52 2 12 2zm4.93 7.36-1.43
+                                                6.78c-.11.51-.41.63-.83.39l-2.3-1.7-1.11
+                                                1.07c-.12.12-.22.22-.45.22l.16-2.34
+                                                4.26-3.85c.18-.16-.04-.25-.28-.09l-5.27
+                                                3.31-2.27-.71c-.49-.15-.5-.49.1-.72l8.88-3.42c.41-.15.77.1.64.7z"/>
+                                        </svg>
+                                        <span>{% trans "send message" %}</span>
+                                    </a>
+                                </td>
                             `;
                             tbody.appendChild(row);
                         });

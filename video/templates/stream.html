@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}Translations{% endblock %}
+{% load i18n %}
+{% block title %}
+    {% trans "translation" as translation_translated %}
+    {{ translation_translated|capfirst }}
+{% endblock %}
 {% block content %}
-    <h1>Translations</h1>
+    {% trans "translation" as translation_translated %}
+    <h2>{{ translation_translated|capfirst }}</h2>
     <div class="card mb-3">
         <div class="ratio ratio-16x9">
           <iframe

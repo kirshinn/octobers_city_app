@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ project_name }}{% endblock %}</title>
+    <title>{% block title %}{% trans "Residents portal of SK Oktyabrsky" %}{% endblock %}</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">{{ project_name }}</a>
+            <a class="navbar-brand" href="{% url 'home' %}">{% trans "Residents portal of SK Oktyabrsky" %}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,26 +20,28 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user_list' %}">Users</a>
+                            <a class="nav-link" href="{% url 'user_list' %}">{% trans "Neighbours" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'stream' %}">VideoStream</a>
+                            <a class="nav-link" href="{% url 'stream' %}">{% trans "VideoStream" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'feedback_email' %}">Feedback</a>
+                            <a class="nav-link" href="{% url 'feedback_email' %}">{% trans "Feedback" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                            <a class="nav-link" href="{% url 'profile' %}">{% trans "Profile" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'logout' %}">{% trans "Logout" %}</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+                            {% trans "sign in" as sign_in_translated %}
+                            <a class="nav-link" href="{% url 'login' %}">{{ sign_in_translated|capfirst }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                            {% trans "register" as register_translated %}
+                            <a class="nav-link" href="{% url 'register' %}">{{ register_translated|capfirst }}</a>
                         </li>
                     {% endif %}
                     <li class="nav-item">
@@ -81,5 +83,7 @@
     </div>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/lib/ag-grid-community.min.js' %}"></script>
+    <script src="{% static 'js/lib/xlsx.full.min.js' %}"></script>
 </body>
 </html>

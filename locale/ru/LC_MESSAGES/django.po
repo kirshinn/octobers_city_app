@@ -1262,8 +1262,116 @@ msgstr ""
 msgid "y"
 msgstr ""
 
+#: baseapp/templates/base.html:39
 #: baseapp/templates/login.html:2
 #: baseapp/templates/login.html:6
 #: baseapp/templates/login.html:17
-msgid "Sign in"
-msgstr "Войти"
+msgid "sign in"
+msgstr "войти"
+
+#: baseapp/templates/base.html:42
+msgid "register"
+msgstr "регистрация"
+
+#: baseapp/templates/base.html:35
+msgid "Logout"
+msgstr "Выйти"
+
+#: baseapp/templates/base.html:23
+msgid "Neighbours"
+msgstr "Соседи"
+
+#: baseapp/templates/base.html:26
+msgid "VideoStream"
+msgstr "Видеокамеры"
+
+#: baseapp/templates/base.html:29
+msgid "Feedback"
+msgstr "Обратная связь"
+
+#: baseapp/templates/base.html:32
+msgid "Profile"
+msgstr "Профиль"
+
+#: baseapp/templates/base.html:8
+#: baseapp/templates/base.html:15
+msgid "Residents portal of SK Oktyabrsky"
+msgstr "Портал жителей СК Октябрьский"
+
+msgid "Enter username"
+msgstr "Введите имя пользователя"
+
+msgid "Enter email"
+msgstr "Введите почту"
+
+msgid "Enter password"
+msgstr "Введите пароль"
+
+msgid "Confirm password"
+msgstr "Повторите пароль"
+
+msgid "House number"
+msgstr "Номер дома"
+
+msgid "Apartment number"
+msgstr "Номер квартиры"
+
+msgid "welcome"
+msgstr "добро пожаловать"
+
+msgid "hello"
+msgstr "привет"
+
+msgid "please"
+msgstr "пожалуйста"
+
+msgid "select"
+msgstr "выберите"
+
+msgid "phone"
+msgstr "телефон"
+
+msgid "email"
+msgstr "почта"
+
+msgid "send message"
+msgstr "написать"
+
+msgid "Search by username, first name, last name, home or apartment"
+msgstr "Поиск по имени пользователя, имени, фамилии, дому или квартире"
+
+msgid "city"
+msgstr "город"
+
+msgid "street"
+msgstr "улица"
+
+msgid "home"
+msgstr "дом"
+
+msgid "entrance"
+msgstr "подьезд"
+
+msgid "floor"
+msgstr "этаж"
+
+msgid "apartment"
+msgstr "квартира"
+
+msgid "translation"
+msgstr "трансляция"
+
+msgid "subject"
+msgstr "тема"
+
+msgid "message"
+msgstr "сообщение"
+
+msgid "Enter subject"
+msgstr "Введите тему"
+
+msgid "Enter your message"
+msgstr "Введите ваше сообщение"
+
+msgid "Allow to open data"
+msgstr "Открыть свои данные"

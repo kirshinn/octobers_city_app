@@ -102,12 +102,13 @@ def user_list(request):
 def user_search(request):
     query = request.GET.get('q', 'users/')
     users = CustomUser.objects.filter(
+        Q(profile__allow_data_access=True),  # фильтрация по чекбоксу
         Q(username__icontains=query) |
         Q(first_name__icontains=query) |
         Q(last_name__icontains=query) |
         Q(address__home__icontains=query) |
         Q(address__apartment__icontains=query)
-    ).select_related('address').order_by('username')
+    ).select_related('address', 'profile').order_by('username')
 
     data = [{
         'username': user.username,
@@ -115,7 +116,8 @@ def user_search(request):
         'last_name': user.last_name or '-',
         'email': user.email or '-',
         'home': user.address.home if hasattr(user, 'address') and user.address.home else '-',
-        'apartment': user.address.apartment if hasattr(user, 'address') and user.address.apartment else '-'
+        'apartment': user.address.apartment if hasattr(user, 'address') and user.address.apartment else '-',
+        'telegram': user.telegram
     } for user in users]
 
     return JsonResponse({'users': data})

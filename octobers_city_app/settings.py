@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4nqs(-5%%t1*72sahp=*6z9wkqoh_mv*wnl_e1m!r_ncjc=&%s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -131,7 +131,7 @@ LOCALE_PATHS = [
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+USE_L10N = True  # Локализация форматов (даты, числа и т.д.)
 USE_TZ = True
 
 

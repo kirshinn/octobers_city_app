@@ -24,3 +24,4 @@ class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     age = models.PositiveIntegerField(blank=True, null=True, default=0)
     bio = models.TextField(blank=True, null=True, default='')
+    allow_data_access = models.BooleanField(default=False)
