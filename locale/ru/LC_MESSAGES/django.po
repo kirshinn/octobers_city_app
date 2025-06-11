@@ -1375,3 +1375,6 @@ msgstr "Введите ваше сообщение"
 
 msgid "Allow to open data"
 msgstr "Открыть свои данные"
+
+msgid "bio"
+msgstr "дополнительная информация"
