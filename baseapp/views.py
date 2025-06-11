@@ -43,12 +43,6 @@ def logout_view(request):
     return redirect('home')
 
 @login_required
-def protected(request):
-    text = "I love Django!"
-    result = analyze_sentiment(text)
-    return render(request, 'protected.html', {'text': text, 'result': result})
-
-@login_required
 def profile(request):
     user = request.user
 
