@@ -1328,6 +1328,9 @@ msgstr "пожалуйста"
 msgid "select"
 msgstr "выберите"
 
+msgid "phone"
+msgstr "телефон"
+
 msgid "email"
 msgstr "почта"
 
@@ -1337,8 +1340,20 @@ msgstr "написать"
 msgid "Search by username, first name, last name, home or apartment"
 msgstr "Поиск по имени пользователя, имени, фамилии, дому или квартире"
 
+msgid "city"
+msgstr "город"
+
+msgid "street"
+msgstr "улица"
+
 msgid "home"
 msgstr "дом"
+
+msgid "entrance"
+msgstr "подьезд"
+
+msgid "floor"
+msgstr "этаж"
 
 msgid "apartment"
 msgstr "квартира"
@@ -1357,3 +1372,6 @@ msgstr "Введите тему"
 
 msgid "Enter your message"
 msgstr "Введите ваше сообщение"
+
+msgid "Allow to open data"
+msgstr "Открыть свои данные"

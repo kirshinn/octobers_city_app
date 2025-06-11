@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Profile - {{ user.username }}{% endblock %}
+{% block title %}{% trans "Profile" %} - {{ user }}{% endblock %}
 
 {% block content %}
 <div class="container my-5">
-    <h2 class="mb-4">User Profile</h2>
+    <h2 class="mb-4">{% trans "Profile" %} - {{ user }}</h2>
     <form method="post" class="row g-3 needs-validation" novalidate>
         {% csrf_token %}
 
         <!-- Username -->
         <div class="col-md-6">
-            <label for="username" class="form-label">Username</label>
+            {% trans "username" as username_translated %}
+            <label for="username" class="form-label">{{ username_translated|capfirst }}</label>
             <input
                 type="text"
                 name="username"
@@ -20,13 +22,14 @@
                 placeholder="JohnDoe"
             >
             <div class="invalid-feedback">
-                Please enter a valid username.
+                {% trans "Please enter a valid" %} {% trans "username" %}.
             </div>
         </div>
 
         <!-- Email -->
         <div class="col-md-6">
-            <label for="email" class="form-label">Email</label>
+            {% trans "email" as email_translated %}
+            <label for="email" class="form-label">{{ email_translated|capfirst }}</label>
             <input
                 type="email"
                 name="email"
@@ -36,13 +39,14 @@
                 placeholder="john.doe@example.com"
             >
             <div class="invalid-feedback">
-                Please enter a valid email address.
+                {% trans "Please enter a valid" %} {% trans "email" %}.
             </div>
         </div>
 
         <!-- First Name -->
         <div class="col-md-6">
-            <label for="first_name" class="form-label">First Name</label>
+            {% trans "first name" as first_name_translated %}
+            <label for="first_name" class="form-label">{{ first_name_translated|capfirst }}</label>
             <input
                 type="text"
                 name="first_name"
@@ -52,13 +56,14 @@
                 placeholder="John"
             >
             <div class="invalid-feedback">
-                Please enter a valid first name.
+                {% trans "Please enter a valid" %} {% trans "first name" %}.
             </div>
         </div>
 
         <!-- Last Name -->
         <div class="col-md-6">
-            <label for="last_name" class="form-label">Last Name</label>
+            {% trans "last name" as last_name_translated %}
+            <label for="last_name" class="form-label">{{ last_name_translated|capfirst }}</label>
             <input
                 type="text"
                 name="last_name"
@@ -68,13 +73,14 @@
                 placeholder="Doe"
             >
             <div class="invalid-feedback">
-                Please enter a valid last name.
+                {% trans "Please enter a valid" %} {% trans "last name" %}.
             </div>
         </div>
 
         <!-- Phone Number -->
         <div class="col-md-6">
-            <label for="phone" class="form-label">Phone Number</label>
+            {% trans "phone" as phone_translated %}
+            <label for="phone" class="form-label">{{ phone_translated|capfirst }}</label>
             <input
                 type="text"
                 name="phone"
@@ -85,13 +91,13 @@
                 pattern="[0-9]{10,15}"
             >
             <div class="invalid-feedback">
-                Please enter a valid phone number.
+                {% trans "Please enter a valid" %} {% trans "phone" %}.
             </div>
         </div>
 
         <!-- Telegram -->
         <div class="col-md-6">
-            <label for="telegram" class="form-label">Telegram Account</label>
+            <label for="telegram" class="form-label">Telegram</label>
             <input
                 type="text"
                 name="telegram"
@@ -102,118 +108,125 @@
                 pattern="[A-Za-z0-9_]{5,32}"
             >
             <div class="invalid-feedback">
-                Please enter a valid telegram account.
+                {% trans "Please enter a valid" %} telegram.
             </div>
         </div>
 
         <!-- Bio -->
         <div class="col-12">
-            <label for="bio" class="form-label">Bio</label>
+            {% trans "bio" as bio_translated %}
+            <label for="bio" class="form-label">{{ bio_translated|capfirst }}</label>
             <textarea
                 class="form-control"
                 id="bio"
                 name="bio"
                 rows="4"
-                placeholder="Tell us about yourself..."
+                placeholder="{% trans "Tell us about yourself..." %}"
             >{{ user.profile.bio }}</textarea>
             <div class="invalid-feedback">
-                Please provide a brief bio.
+                {% trans "Please provide a brief" %} {% trans "bio" %}.
             </div>
         </div>
 
         <!-- User Address City -->
         <div class="col-md-4">
-            <label for="city" class="form-label">City</label>
+            {% trans "city" as city_translated %}
+            <label for="city" class="form-label">{{ city_translated|capfirst }}</label>
             <input
                 type="text"
                 name="city"
                 id="city"
                 class="form-control"
                 value="{{ user.address.city }}"
-                placeholder="city"
+                placeholder="{% trans "city" %}"
             >
             <div class="invalid-feedback">
-                Please enter a valid city.
+                {% trans "Please enter a valid" %} {% trans "city" %}.
             </div>
         </div>
 
         <!-- User Address Street -->
         <div class="col-md-4">
-            <label for="street" class="form-label">Street</label>
+            {% trans "street" as street_translated %}
+            <label for="street" class="form-label">{{ street_translated|capfirst }}</label>
             <input
                 type="text"
                 name="street"
                 id="street"
                 class="form-control"
                 value="{{ user.address.street }}"
-                placeholder="street"
+                placeholder="{% trans "street" %}"
             >
             <div class="invalid-feedback">
-                Please enter a valid street.
+                {% trans "Please enter a valid" %} {% trans "street" %}.
             </div>
         </div>
 
         <!-- User Address Home -->
         <div class="col-md-4">
-            <label for="home" class="form-label">Home</label>
+            {% trans "home" as home_translated %}
+            <label for="home" class="form-label">{{ home_translated|capfirst }}</label>
             <input
                 type="number"
                 name="home"
                 id="home"
                 class="form-control"
                 value="{{ user.address.home }}"
-                placeholder="home number"
+                placeholder="{% trans "home" %}"
             >
             <div class="invalid-feedback">
-                Please enter a valid home number.
+                {% trans "Please enter a valid" %} {% trans "home" %}.
             </div>
         </div>
 
         <!-- User Address Entrance -->
         <div class="col-md-4">
-            <label for="entrance" class="form-label">Entrance</label>
+            {% trans "entrance" as entrance_translated %}
+            <label for="entrance" class="form-label">{{ entrance_translated|capfirst }}</label>
             <input
                 type="number"
                 name="entrance"
                 id="entrance"
                 class="form-control"
                 value="{{ user.address.entrance }}"
-                placeholder="entrance"
+                placeholder="{% trans "entrance" %}"
             >
             <div class="invalid-feedback">
-                Please enter a valid entrance.
+                {% trans "Please enter a valid" %} {% trans "entrance" %}.
             </div>
         </div>
 
         <!-- User Address Floor -->
         <div class="col-md-4">
-            <label for="floor" class="form-label">Floor</label>
+            {% trans "floor" as floor_translated %}
+            <label for="floor" class="form-label">{{ floor_translated|capfirst }}</label>
             <input
                 type="number"
                 name="floor"
                 id="floor"
                 class="form-control"
                 value="{{ user.address.floor }}"
-                placeholder="floor"
+                placeholder="{% trans "floor" %}"
             >
             <div class="invalid-feedback">
-                Please enter a valid floor.
+                {% trans "Please enter a valid" %} {% trans "floor" %}.
             </div>
         </div>
 
         <!-- User Address Apartment -->
         <div class="col-md-4">
-            <label for="apartment" class="form-label">Apartment</label>
+            {% trans "apartment" as apartment_translated %}
+            <label for="apartment" class="form-label">{{ apartment_translated|capfirst }}</label>
             <input
                 type="number"
                 name="apartment"
                 id="apartment"
                 class="form-control"
                 value="{{ user.address.apartment }}"
-                placeholder="apartment"
+                placeholder="{% trans "apartment" %}"
             >
             <div class="invalid-feedback">
-                Please enter a valid apartment.
+                {% trans "Please enter a valid" %} {% trans "apartment" %}.
             </div>
         </div>
 
@@ -227,13 +240,13 @@
                 {% if user.profile.allow_data_access %}checked{% endif %}
             >
             <label class="form-check-label" for="allow_data_access">
-                Allow to open data
+                {% trans "Allow to open data" %}
             </label>
         </div>
 
         <!-- Submit Button -->
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Save Profile</button>
+            <button class="btn btn-primary" type="submit">{% trans "Save" %} {% trans "Profile" %}</button>
         </div>
     </form>
 </div>
