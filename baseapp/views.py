@@ -5,6 +5,7 @@ from django.views.decorators.http import require_GET
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 from core.ml.sentiment_model import analyze_sentiment
 from accounts.models import CustomUser, Profile, Address
 from .forms import CustomUserCreationForm, ProfileForm # Используем кастомную форму для User
@@ -76,7 +77,7 @@ def profile(request):
             # Save profile data
             form.save()
 
-            messages.success(request, f'Profile {user} updated!')
+            messages.success(request, _('Profile {user} updated!').format(user=user))
 
             return redirect('profile')
         else:

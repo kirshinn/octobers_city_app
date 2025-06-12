@@ -1378,3 +1378,6 @@ msgstr "Открыть свои данные"
 
 msgid "bio"
 msgstr "дополнительная информация"
+
+msgid "Profile {user} updated!"
+msgstr "Профиль {user} обновлён!"
