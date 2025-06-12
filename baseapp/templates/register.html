@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans "Register" %}{% endblock %}
+{% trans "register" as register_translated %}
+{% block title %}{{ register_translated|capfirst }}{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <h1 class="mb-4">{% trans "Register" %}</h1>
+        {% trans "register" as register_translated %}
+        <h1 class="mb-4">{{ register_translated|capfirst }}</h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p|safe }}
-            <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
+            {% trans "register" as register_translated %}
+            <button type="submit" class="btn btn-primary">{{ register_translated|capfirst }}</button>
         </form>
     </div>
 </div>

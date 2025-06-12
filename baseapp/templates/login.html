@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans "Sign in" %}{% endblock %}
+{% trans "sign in" as sign_in_translated %}
+{% block title %}{{ sign_in_translated|capfirst }}{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <h1 class="mb-4">{% trans "Sign in" %}</h1>
+        {% trans "sign in" as sign_in_translated %}
+        <h1 class="mb-4">{{ sign_in_translated|capfirst }}</h1>
         <form method="post">
             {% csrf_token %}
             <div class="mb-3">
@@ -16,7 +18,8 @@
                 <label for="password" class="form-label">{% trans "Password" %}</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">{% trans "Sign in" %}</button>
+            {% trans "sign in" as sign_in_translated %}
+            <button type="submit" class="btn btn-primary">{{ sign_in_translated|capfirst }}</button>
         </form>
     </div>
 </div>
