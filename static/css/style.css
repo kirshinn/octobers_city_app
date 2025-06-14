@@ -1,0 +1,25 @@
+@media (max-width: 768px) {
+    table thead {
+        display: none;
+    }
+
+    table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border: none;
+    }
+
+    table tbody tr td::before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
+}

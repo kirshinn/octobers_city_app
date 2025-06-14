@@ -43,12 +43,12 @@
                         data.users.forEach(user => {
                             const row = document.createElement('tr');
                             row.innerHTML = `
-                                <td>${user.username}</td>
-                                <td>${user.first_name}</td>
-                                <td>${user.last_name}</td>
-                                <td>${user.email}</td>
-                                <td>${user.home}</td>
-                                <td>${user.apartment}</td>
+                                <td data-label="{% trans "username" %}">${user.username}</td>
+                                <td data-label="{% trans "first name" %}">${user.first_name}</td>
+                                <td data-label="{% trans "last name" %}">${user.last_name}</td>
+                                <td data-label="{% trans "email" %}">${user.email}</td>
+                                <td data-label="{% trans "home" %}">${user.home}</td>
+                                <td data-label="{% trans "apartment" %}">${user.apartment}</td>
                                 <td>
                                     <a href="https://t.me/${user.telegram}" target="_blank"
                                        style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
