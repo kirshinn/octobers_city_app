@@ -85,6 +85,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+
+    'mysql': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'your_database_name',  # Имя вашей базы данных
+            'USER': 'your_database_user',  # Пользователь MySQL
+            'PASSWORD': 'your_database_password',  # Пароль пользователя
+            'HOST': 'localhost',  # Или IP-адрес сервера MySQL, например, '127.0.0.1'
+            'PORT': '3306',  # Порт MySQL (по умолчанию 3306)
+            'OPTIONS': {
+                'charset': 'utf8mb4',  # Для поддержки эмодзи и других символов
+            },
     }
 }
 
