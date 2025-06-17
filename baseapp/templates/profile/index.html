@@ -104,11 +104,28 @@
                 id="telegram"
                 class="form-control"
                 value="{{ user.telegram }}"
-                placeholder="username"
+                placeholder="telegram"
                 pattern="[A-Za-z0-9_]{5,32}"
             >
             <div class="invalid-feedback">
                 {% trans "Please enter a valid" %} telegram.
+            </div>
+        </div>
+
+        <!-- Whatsapp -->
+        <div class="col-md-6">
+            <label for="whatsapp" class="form-label">Whatsapp</label>
+            <input
+                type="text"
+                name="whatsapp"
+                id="whatsapp"
+                class="form-control"
+                value="{{ user.whatsapp }}"
+                placeholder="+71234567890"
+                pattern="\+[0-9]{9,14}"
+            >
+            <div class="invalid-feedback">
+                {% trans "Please enter a valid" %} whatsapp.
             </div>
         </div>
 
@@ -120,7 +137,7 @@
                 class="form-control"
                 id="bio"
                 name="bio"
-                rows="4"
+                rows="3"
                 placeholder="{% trans "Tell us about yourself..." %}"
             >{{ user.profile.bio }}</textarea>
             <div class="invalid-feedback">

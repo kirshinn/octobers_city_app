@@ -1,3 +1,5 @@
+import re
+
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.http import JsonResponse
@@ -9,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 # from core.ml.sentiment_model import analyze_sentiment
 from accounts.models import CustomUser, Profile, Address
 from .forms import CustomUserCreationForm, ProfileForm # Используем кастомную форму для User
+
 
 def home(request):
     return render(request, 'home.html')
@@ -63,6 +66,20 @@ def profile(request):
             user.last_name = form.cleaned_data['last_name']
             user.phone = form.cleaned_data['phone']
             user.telegram = form.cleaned_data['telegram']
+
+            # Получаем номер из формы
+            whatsapp_input = form.cleaned_data['whatsapp']
+
+            # Очищаем номер: оставляем только + и цифры
+            cleaned_whatsapp = re.sub(r'[^\d+]', '', whatsapp_input)
+
+            # Если номер не начинается с +, добавляем + (при необходимости)
+            if not cleaned_whatsapp.startswith('+'):
+                cleaned_whatsapp = '+' + cleaned_whatsapp
+
+            # Сохраняем очищенный номер
+            user.whatsapp = cleaned_whatsapp
+
             user.save()
 
             # Save user address data
@@ -112,7 +129,8 @@ def user_search(request):
         'email': user.email or '-',
         'home': user.address.home if hasattr(user, 'address') and user.address.home else '-',
         'apartment': user.address.apartment if hasattr(user, 'address') and user.address.apartment else '-',
-        'telegram': user.telegram
+        'telegram': user.telegram,
+        'whatsapp': user.whatsapp,
     } for user in users]
 
     return JsonResponse({'users': data})

@@ -16,6 +16,7 @@ class Address(models.Model):
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=17, null=True, blank=True, default='')
     telegram = models.CharField(max_length=32, null=True, blank=True, default='')
+    whatsapp = models.CharField(max_length=14, null=True, blank=True, default='')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
