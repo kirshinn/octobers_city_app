@@ -74,6 +74,7 @@ class ProfileForm(forms.ModelForm):
     last_name = forms.CharField(max_length=30, required=False)
     phone = forms.CharField(max_length=17, required=False)
     telegram = forms.CharField(max_length=32, required=False)
+    whatsapp = forms.CharField(max_length=14, required=False)
 
     # Address
     city = forms.CharField(max_length=30, required=False)
@@ -98,6 +99,7 @@ class ProfileForm(forms.ModelForm):
             self.fields['last_name'].initial = user.last_name
             self.fields['phone'].initial = user.phone
             self.fields['telegram'].initial = user.telegram
+            self.fields['whatsapp'].initial = user.whatsapp
 
         if address:
             self.fields['city'].initial = address.city
